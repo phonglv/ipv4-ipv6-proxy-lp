@@ -68,15 +68,14 @@ EOF
 }
 
 gen_proxy_file_for_user() {
-    cat >proxy.txt <<EOF
+    cat >{IP4}.txt <<EOF
 $(awk -F "/" '{print $3 ":" $4 ":" $1 ":" $2 }' ${WORKDATA})
 EOF
 }
 
 upload_proxy() {
     cd $WORKDIR
-    zip proxy.zip proxy.txt
-    URL=$(curl -F "file=@proxy.zip" https://beta.apileak.com/api/proxy --ssl-no-revoke)
+    URL=$(curl -F "file=@${IP4}.txt" https://beta.apileak.com/api/proxy --ssl-no-revoke)
 
     echo "Proxy is ready! Format IP:PORT:LOGIN:PASS"
     echo "Check imported at: https://beta.apileak.com/manage/proxy"
