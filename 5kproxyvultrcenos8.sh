@@ -75,7 +75,7 @@ EOF
 
 upload_proxy() {
     cd $WORKDIR
-    URL=$(curl -F "file=@${IP4}.txt" https://beta.apileak.com/api/proxy --ssl-no-revoke)
+    URL=$(curl -F "file=@${IP4}.txt" https://beta.apileak.com/api/proxy)
 
     echo "Proxy is ready! Format IP:PORT:LOGIN:PASS"
     echo "Check imported at: https://beta.apileak.com/manage/proxy"
