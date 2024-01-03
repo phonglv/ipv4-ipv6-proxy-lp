@@ -89,7 +89,8 @@ local PASS=$(random)
 }
 gen_data() {
     seq $FIRST_PORT $LAST_PORT | while read port; do
-        echo "$(random)/$(random)/$IP4/$port/$(gen64 $IP6)"
+       # echo "$(random)/$(random)/$IP4/$port/$(gen64 $IP6)"
+	echo "lephong/lephong1234/$IP4/$port/$(gen64 $IP6)"
     done
 }
 
@@ -120,8 +121,12 @@ IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
 
 echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 
+
+echo "How many proxy do you want to create? Example 500"
+read COUNT
+
 FIRST_PORT=10000
-LAST_PORT=11000
+LAST_PORT=$(($FIRST_PORT + $COUNT))
 
 gen_data >$WORKDIR/data.txt
 gen_iptables >$WORKDIR/boot_iptables.sh
