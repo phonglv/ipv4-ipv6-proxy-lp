@@ -75,10 +75,16 @@ EOF
 
 upload_proxy() {
     cd $WORKDIR
-    URL=$(curl -F "file=@${IP4}.txt" https://beta.apileak.com/api/proxy)
+   # URL=$(curl -F "file=@${IP4}.txt" https://beta.apileak.com/api/proxy)
+local PASS=$(random)
+    zip --password $PASS proxy.zip proxy.txt
+    URL=$(curl -s --upload-file ./proxy.zip https://transfer.whalebone.io/yanproxy.zip)
 
     echo "Proxy is ready! Format IP:PORT:LOGIN:PASS"
-    echo "Check imported at: https://beta.apileak.com/manage/proxy"
+    echo "Download zip archive from: ${URL}"
+    echo "Password: ${PASS}"
+   # echo "Proxy is ready! Format IP:PORT:LOGIN:PASS"
+   # echo "Check imported at: https://beta.apileak.com/manage/proxy"
 
 }
 gen_data() {
@@ -108,7 +114,8 @@ WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
 mkdir $WORKDIR && cd $_
 
-IP4=$(curl -4 -s icanhazip.com)
+#IP4=$(curl -4 -s icanhazip.com)
+IP4="192.168.1.166"
 IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
 
 echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
