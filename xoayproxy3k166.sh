@@ -115,7 +115,8 @@ echo "installing apps"
 echo "working folder = /home/proxy-installer"
 WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
-mkdir -y $WORKDIR && cd $_
+rm -rf $WORKDIR
+mkdir $WORKDIR && cd $_
 
 #IP4=$(curl -4 -s icanhazip.com)
 IP4="192.168.1.166"
