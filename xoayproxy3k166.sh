@@ -148,13 +148,13 @@ cat >>/etc/rc.local <<EOF
 systemctl stop NetworkManager.service
 systemctl start NetworkManager.service
 # ifup ${main_interface}
-echo "bash1"
+
 bash ${WORKDIR}/boot_iptables.sh
-echo "bash2"
+
 bash ${WORKDIR}/boot_ifconfig.sh
-echo "ulimit"
+
 ulimit -n 65535
-echo "usr"
+
 /usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
 EOF
 
