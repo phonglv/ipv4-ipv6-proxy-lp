@@ -142,19 +142,7 @@ echo NM_CONTROLLED="no" >> /etc/sysconfig/network-scripts/ifcfg-${main_interface
 chmod +x $WORKDIR/boot_*.sh /etc/rc.local
 echo "gen_3proxy"
 gen_3proxy >/usr/local/etc/3proxy/3proxy.cfg
-echo "cat"
-cat >>/etc/rc.local <<EOF
-systemctl stop NetworkManager.service
-systemctl start NetworkManager.service
-# ifup ${main_interface}
-bash ${WORKDIR}/boot_iptables.sh
-bash ${WORKDIR}/boot_ifconfig.sh
-ulimit -n 65535
-/usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
-EOF
 
-bash /etc/rc.local
 
 gen_proxy_file_for_user
 
-upload_proxy
