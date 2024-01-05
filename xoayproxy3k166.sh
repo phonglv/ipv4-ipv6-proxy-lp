@@ -145,4 +145,5 @@ gen_3proxy >>/usr/local/etc/3proxy/3proxy.cfg
 
 
 gen_proxy_file_for_user
+systemctl restart network.service
 
