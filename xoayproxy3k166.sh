@@ -141,7 +141,7 @@ echo "echo NM_CONTROLLED"
 echo NM_CONTROLLED="no" >> /etc/sysconfig/network-scripts/ifcfg-${main_interface}
 chmod +x $WORKDIR/boot_*.sh /etc/rc.local
 echo "gen_3proxy"
-gen_3proxy >/usr/local/etc/3proxy/3proxy.cfg
+gen_3proxy >>/usr/local/etc/3proxy/3proxy.cfg
 
 
 gen_proxy_file_for_user
