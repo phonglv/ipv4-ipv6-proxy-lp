@@ -131,21 +131,30 @@ echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 FIRST_PORT=10000
 #LAST_PORT=$(($FIRST_PORT + $COUNT))
 LAST_PORT=10010
+echo "gen_data"
 gen_data >$WORKDIR/data.txt
+echo "gen_iptables"
 gen_iptables >$WORKDIR/boot_iptables.sh
+echo "gen_ifconfig"
 gen_ifconfig >$WORKDIR/boot_ifconfig.sh
+echo "echo NM_CONTROLLED"
 echo NM_CONTROLLED="no" >> /etc/sysconfig/network-scripts/ifcfg-${main_interface}
 chmod +x $WORKDIR/boot_*.sh /etc/rc.local
-
+echo "gen_3proxy"
 gen_3proxy >/usr/local/etc/3proxy/3proxy.cfg
-
+echo "cat"
 cat >>/etc/rc.local <<EOF
+//
 systemctl stop NetworkManager.service
 systemctl start NetworkManager.service
 # ifup ${main_interface}
+echo "bash1"
 bash ${WORKDIR}/boot_iptables.sh
+echo "bash2"
 bash ${WORKDIR}/boot_ifconfig.sh
+echo "ulimit"
 ulimit -n 65535
+echo "usr"
 /usr/local/etc/3proxy/bin/3proxy /usr/local/etc/3proxy/3proxy.cfg &
 EOF
 
