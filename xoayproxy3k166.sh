@@ -132,18 +132,17 @@ FIRST_PORT=10000
 #LAST_PORT=$(($FIRST_PORT + $COUNT))
 LAST_PORT=10002
 echo "gen_data"
-gen_data >$WORKDIR/data.txt
+gen_data >>$WORKDIR/data.txt
 echo "gen_iptables"
-gen_iptables >$WORKDIR/boot_iptables.sh
+gen_iptables >>$WORKDIR/boot_iptables.sh
 echo "gen_ifconfig"
-gen_ifconfig >$WORKDIR/boot_ifconfig.sh
-echo "echo NM_CONTROLLED"
-echo NM_CONTROLLED="no" >> /etc/sysconfig/network-scripts/ifcfg-${main_interface}
+gen_ifconfig >>$WORKDIR/boot_ifconfig.sh
+#echo "echo NM_CONTROLLED"
+#echo NM_CONTROLLED="no" >> /etc/sysconfig/network-scripts/ifcfg-${main_interface}
 chmod +x $WORKDIR/boot_*.sh /etc/rc.local
 echo "gen_3proxy"
 gen_3proxy >>/usr/local/etc/3proxy/3proxy.cfg
 
 
 gen_proxy_file_for_user
-systemctl restart network.service
 
