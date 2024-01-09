@@ -78,8 +78,8 @@ upload_proxy() {
    # URL=$(curl -F "file=@${IP4}.txt" https://beta.apileak.com/api/proxy)
 local PASS=$(random)
     zip --password $PASS proxy.zip ${IP4}.txt
-    URL=$(curl -s --upload-file ./proxy.zip https://transfer.whalebone.io/yanproxy.zip)
-
+    # URL=$(curl -s --upload-file ./proxy.zip https://transfer.whalebone.io/yanproxy.zip)
+	URL=$(curl -s --upload-file proxy.zip https://transfer.sh/proxy.zip)
     echo "Proxy is ready! Format IP:PORT:LOGIN:PASS"
     echo "Download zip archive from: ${URL}"
     echo "Password: ${PASS}"
