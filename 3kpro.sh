@@ -79,7 +79,8 @@ upload_proxy() {
 local PASS=$(random)
     zip --password $PASS proxy.zip ${IP4}.txt
     # URL=$(curl -s --upload-file ./proxy.zip https://transfer.whalebone.io/yanproxy.zip)
-    URL=$(curl -s --upload-file proxy.zip https://file.io)
+    URL=$(curl -s --upload-file proxy.zip https://transfer.sh/proxy.zip)
+    #URL=$(curl -s --upload-file proxy.zip https://file.io)
 	#URL=$(curl -s --upload-file proxy.zip https://transfer.sh/proxy.zip)
     echo "Proxy is ready! Format IP:PORT:LOGIN:PASS"
     echo "Download zip archive from: ${URL}"
@@ -118,8 +119,8 @@ WORKDIR="/home/proxy-installer"
 WORKDATA="${WORKDIR}/data.txt"
 mkdir $WORKDIR && cd $_
 
-#IP4=$(curl -4 -s icanhazip.com)
-IP4="192.168.1.165"
+IP4=$(curl -4 -s icanhazip.com)
+#IP4="192.168.1.165"
 IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
 
 echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
